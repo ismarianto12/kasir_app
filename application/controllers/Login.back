@@ -1,0 +1,60 @@
+  
+if ($this->m_login->is_logged_in()) {
+            //jika memang session sudah terdaftar, maka redirect ke halaman dahsboard
+            redirect("home");
+        } else {
+
+            //jika session belum terdaftar
+
+            //set form validation
+            $this->form_validation->set_rules('username', 'Username', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+
+            //set message form validation
+            $this->form_validation->set_message('required', '<div class="alert alert-danger" style="margin-top: 3px">
+                    <div class="header"><b><i class="fa fa-exclamation-circle"></i> {field}</b> harus diisi</div></div>');
+
+            //cek validasi
+            if ($this->form_validation->run() == TRUE) {
+
+                //get data dari FORM
+                $username = $this->input->post("username", TRUE);
+                $password = sha1($this->input->post('password', TRUE));
+
+                //checking data via model
+                //$checking = $this->m_login->cek_login('tbl_login', array('username' => $username), array('password' => $password));
+                $checking = $this->m_login->cek_login($username, $password);
+
+                //jika ditemukan, maka create session
+                if ($checking != FALSE) {
+                    foreach ($checking as $apps) {
+
+                        $session_data = array(
+                            'id_login'   => $apps->id_login,
+                            'username' => $apps->username,
+                            'password' => $apps->password,
+                            'level' => $apps->level,
+                            'status' => $apps->status
+                        );
+                        //set session userdata
+                        $this->session->set_userdata($session_data);
+
+                        //redirect berdasarkan level user
+                        if ($this->session->userdata("level") == "administrator") {
+                            redirect('home');
+                        } elseif ($this->session->userdata("level") == "admin") {
+                            redirect('home');
+                        } elseif ($this->session->userdata("level") == "user") {
+                            redirect('home');
+                        } else {
+                            echo "";
+                        }
+                    }
+                } else { 
+                    $data['error'] = '<div class="alert alert-danger alert_sh" role="alert"><i class="fa fa-exclamation-circle"></i> <strong>LOGIN GAGAL!</strong> Username / password Salah!</div>';
+                    $this->load->view('login', $data);
+                }
+            } else {
+
+                $this->load->view('login');
+            }

@@ -1,0 +1,108 @@
+.sekeleton-container-redesign {
+  background: linear-gradient(90deg, #c0ebdc 50%, #edf6e1 50%);
+  padding: 0 20px 0;
+  min-height: 100%;
+}
+@media screen and (max-width: 992px) {
+  .sekeleton-container-redesign {
+    background: #edf6e1;
+  }
+}
+@media screen and (max-width: 768px) {
+  .sekeleton-container-redesign {
+    padding: 10px 175px 0;
+  }
+}
+@media screen and (max-width: 576px) {
+  .sekeleton-container-redesign {
+    padding: 0 25px 0;
+  }
+}
+.sekeleton-container-redesign .logo-sekeleton {
+  background: url('/assets/images/majoo.png') no-repeat;
+  height: 40px;
+  margin-top: 60px;
+  margin-left: 60px;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 992px) {
+  .sekeleton-container-redesign .logo-sekeleton {
+    margin: 50px 0px 20px auto;
+  }
+}
+.sekeleton-container-redesign .button-sekeleton {
+  margin-left: 60px;
+  animation: shine-left 3s infinite linear;
+  background-image: linear-gradient(90deg, #c0ebdc 0px, #eceff1 40px, #c0ebdc 80px);
+  background-size: 1200px;
+}
+@media screen and (max-width: 992px) {
+  .sekeleton-container-redesign .button-sekeleton {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+.sekeleton-container-redesign .h-sm {
+  height: 18px;
+  border-radius: 9px;
+}
+.sekeleton-container-redesign .h-md {
+  height: 40px;
+  border-radius: 20px;
+}
+.sekeleton-container-redesign .w-sm {
+  width: 15%;
+}
+.sekeleton-container-redesign .w-md {
+  width: 40%;
+}
+.sekeleton-container-redesign .w-lg {
+  width: 75%;
+}
+.sekeleton-container-redesign .space-sm {
+  margin-bottom: 8px;
+}
+.sekeleton-container-redesign .space-md {
+  margin-bottom: 24px;
+}
+.sekeleton-container-redesign .space-lg {
+  margin-bottom: 48px;
+}
+@media (max-width: 768px) {
+  .main-skeleton-container .header {
+    display: block;
+    height: 108px;
+  }
+  .main-skeleton-container .header .logo-container {
+    background-color: #00b7b5;
+    background-image: none;
+    border-top: 8px solid #00b7b5;
+    border-bottom: 1px solid #00a6a3;
+  }
+  .main-skeleton-container .header .logo-container .logo {
+    margin-left: 14px;
+  }
+  .main-skeleton-container .header .header-right {
+    background-color: #00b7b5;
+    height: 45px;
+  }
+  .main-skeleton-container .header .header-right .userbox {
+    border: 0px;
+  }
+  .main-skeleton-container .header .header-right .userbox:after {
+    display: none;
+  }
+  .main-skeleton-container .header .header-right .userbox .sk-base.sk-normal {
+    margin-top: 5px;
+    height: 14px;
+  }
+  .main-skeleton-container .inner-wrapper {
+    padding: 0px;
+  }
+  .main-skeleton-container .page-header {
+    display: none;
+  }
+  .main-skeleton-container .text-right {
+    display: none;
+  }
+}
