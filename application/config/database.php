@@ -1,6 +1,6 @@
 <?php
 // alter table tbl_login add column privelage text NOT NULL after nama;
-defined('BASEPATH') or exit('No direct script access allowed');
+//defined('BASEPATH') or exit('No direct script access allowed');
  
 $hostname  =  'localhost';
 $username  =  'root';

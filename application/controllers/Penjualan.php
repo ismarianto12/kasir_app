@@ -19,7 +19,7 @@ class Penjualan extends CI_Controller
     public function index()
     {
         $x['page_title'] = 'Data : Penjualan';
-        $this->template->load('Template', 'tmpenjualan/tmpenjualan_list', $x);
+        $this->template->load('template', 'tmpenjualan/tmpenjualan_list', $x);
     }
 
     public function json($params = '')

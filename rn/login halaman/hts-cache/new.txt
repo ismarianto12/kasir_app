@@ -1,0 +1,3 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+22:45:36	10880/10880	---MCZ	403	error ('Forbidden')	text/html	date:Tue,%2018%20Aug%202020%2015:45:36%20GMT	https://dashboard.majoo.id/auth/login	C:/xampp/htdocs/rn/login%20halaman/dashboard.majoo.id/auth/login.0.delayed	(from )
+22:45:39	5196/5196	---MCZ	403	error ('Forbidden')	text/html	date:Tue,%2018%20Aug%202020%2015:45:39%20GMT	https://dashboard.majoo.id/robots.txt		(from )

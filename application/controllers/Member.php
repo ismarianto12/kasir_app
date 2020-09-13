@@ -21,7 +21,7 @@ class Member extends CI_Controller
     public function index()
     {
         $x['page_title'] = 'Data : Member';
-        $this->template->load('Template', 'member/member_list', $x);
+        $this->template->load('template', 'member/member_list', $x);
     }
 
     public function json($params = '')
@@ -49,7 +49,7 @@ class Member extends CI_Controller
 
                 'page_title' => 'Detail :  MEMBER',
             );
-            $this->template->load('Template', 'member/member_read', $data);
+            $this->template->load('template', 'member/member_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-warniing fade-in">Data Tidak Di Temukan.</div>');
             redirect(site_url('member'));

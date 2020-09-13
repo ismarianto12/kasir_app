@@ -19,7 +19,7 @@
                 'itemjual' => '',
 
             ];
-            $this->template->load('Template', 'home', $x);
+            $this->template->load('template', 'home', $x);
         }
 
         function limit_access()

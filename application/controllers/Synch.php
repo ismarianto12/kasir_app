@@ -16,12 +16,11 @@ class Synch extends CI_Controller
         $render = [
             'page_title' => "Sinkronisasi data",
         ];
-        $this->template->load('Template', 'synch/sync', $render);
+        $this->template->load('template', 'synch/sync', $render);
     }
   
     public function code($params)
-    {
-        // You can put anything here to generate of barcode
+    { 
         $this->set_barcode($params);
     }
 

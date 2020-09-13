@@ -17,7 +17,7 @@ class Profile extends CI_controller
 			'level' => $row->level,
 			'status' => $row->status,
 		);
-		$this->template->load('Template', 'profil', $x);
+		$this->template->load('template', 'profil', $x);
 	}
 	function action_insert()
 	{

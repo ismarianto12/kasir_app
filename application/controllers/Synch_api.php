@@ -4,7 +4,7 @@ class Synch_api extends CI_Controller
 {
     function __construct()
     {
-        error_reporting(0);
+        // error_reporting(0);
         parent::__construct();
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
@@ -58,13 +58,13 @@ class Synch_api extends CI_Controller
 
     function transaksi_kirim()
     {
-        $transaski  = $this->db->get('trtransaksi')->result_array();
-        $key       = ['api_key' => 'rian123'];
+        $transaski  = $this->db->get('tmpenjualan')->result_array();
+        $key        = ['api_key' => 'rian123'];
         $data       = array_merge($transaski, $key);
         $data_app   = json_encode($data);
-        $curl = curl_init();
+        $curl       = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://gaiabiai.my.id/synch_server/insert_transaction",
+            CURLOPT_URL => "http://gaiabiai.my.id/synch_server/receive_transac",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -78,10 +78,16 @@ class Synch_api extends CI_Controller
                 "Content-Type: application/json",
             ),
         ));
-
+        if (curl_error($curl)) {
+            echo json_encode(['status' => 2, 'msg' => 'gagal karena']);
+        }
         $response = curl_exec($curl);
         curl_close($curl);
-        echo json_encode(['status' => 1, 'msg' => 'data berhasil di kirim ke server']);
+
+        echo $response;
+        exit();
+
+        echo json_encode(['status' => 1, 'msg' => 'data  di kirim ke server']);
     }
 
 
@@ -124,7 +130,6 @@ class Synch_api extends CI_Controller
             $check = $this->db->get_where('tbl_barang', ['kode_barang' => $rstok->kode_barang]);
             if ($check->num_rows() > 0) {
             } else {
-
                 $data  = [
                     'kode_barang' => $rstok->kode_barang,
                     'nm_barang' => $rstok->nm_barang,
@@ -197,6 +202,7 @@ class Synch_api extends CI_Controller
 
     function terima_transaksi()
     {
+        ///table yang di pakai tmpenjualan;
         $key       = ['api_key' => 'rian123'];
         $data_app   = json_encode($key);
         $curl = curl_init();
@@ -219,22 +225,28 @@ class Synch_api extends CI_Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $insert_lokal = json_decode($response, TRUE);
-        foreach ($insert_lokal as $rtransaksi) {
-            $inserttr = [
-                'no_penjualan' => $rtransaksi['no_penjualan'],
-                'kasir_id' => $rtransaksi['kasir_id'],
-                'barang_id' => $rtransaksi['barang_id'],
-                'member_id' => $rtransaksi['member_id'],
-                'price' => $rtransaksi['price'],
-                'item_name' => $rtransaksi['item_name'],
-                'jumlah' => $rtransaksi['jumlah'],
-                'diskon' => $rtransaksi['diskon'],
-                'finish' => $rtransaksi['finish'],
-                'date_updated' => $rtransaksi['date_updated'],
-                'date_created' => $rtransaksi['date_created'],
-                'subtotal' => $rtransaksi['subtotal'],
-            ];
-            $this->db->insert('trtransaksi', $inserttr);
+        foreach ($insert_lokal as $ls) {
+            $check = $this->db->get_where('tmpenjualan', [
+                'no_penjualan' => $ls['no_penjualan'],
+            ]);
+        
+            if ($check->num_rows() > 0) {
+            } else {
+                $updata = [
+                    'no_penjualan' => $ls['no_penjualan'],
+                    'kasir_id' => $ls['kasir_id'],
+                    'barang_id' => $ls['barang_id'],
+                    'member_id' => $ls['member_id'],
+                    'jumlah' => $ls['jumlah'],
+                    'subtotal' => $ls['subtotal'],
+                    'diskon' => $ls['diskon'],
+                    'price' => $ls['price'],
+                    'item_name' => $ls['item_name'],
+                    'date_created' => date('Y-m-d H:i:s'),
+                    'date_updated' => date('Y-m-d H:i:s'),
+                ];
+                $data = $this->db->insert('tmpenjualan', $updata);
+            }
         }
         echo json_encode(['status' => 1, 'msg' => 'data berhasil di kirim ke server']);
     }

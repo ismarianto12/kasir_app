@@ -21,7 +21,7 @@ class Tmmodul extends CI_Controller
     public function index()
     {
         $x['page_title'] = 'Data : Tmmodul';
-        $this->template->load('Template', 'tmmodul/tmmodul_list', $x);
+        $this->template->load('template', 'tmmodul/tmmodul_list', $x);
     }
 
     public function json()
@@ -46,7 +46,7 @@ class Tmmodul extends CI_Controller
 
                 'page_title' => 'Detail :  TMMODUL',
             );
-            $this->template->load('Template', 'tmmodul/tmmodul_read', $data);
+            $this->template->load('template', 'tmmodul/tmmodul_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-warniing fade-in">Data Tidak Di Temukan.</div>');
             redirect(site_url('tmmodul'));
@@ -68,7 +68,7 @@ class Tmmodul extends CI_Controller
             'date_created' => set_value('date_created'),
             'date_updated' => set_value('date_updated'),
         );
-        $this->template->load('Template', 'tmmodul/tmmodul_form', $data);
+        $this->template->load('template', 'tmmodul/tmmodul_form', $data);
     }
 
     public function tambah_data()
@@ -112,7 +112,7 @@ class Tmmodul extends CI_Controller
                 'date_created' => set_value('date_created', $row->date_created),
                 'date_updated' => set_value('date_updated', $row->date_updated),
             );
-            $this->template->load('Template', 'tmmodul/tmmodul_form', $data);
+            $this->template->load('template', 'tmmodul/tmmodul_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-info fade-in">Data Tidak Di Temukan.</div>');
             redirect(site_url('tmmodul'));

@@ -39,6 +39,7 @@
                     <div id="show_app"></div>
                 </div>
                 <div class='white-box'>
+                    <div class="alert alert-danger">Laba rugi hanya dapat di report apabila transaksi dis simpan dan struk di cetak. </div>
                     <table class="table" id="barang_tb">
                         <thead>
                             <tr>
@@ -282,7 +283,6 @@
                             window.open('<?= base_url('trtransaksi/print_struk/') ?>' + n, '1429893142534', 'width=' + (parseInt(window.innerWidth) * 0.3) + ',height=' + (parseInt(window.innerHeight) * .3) + ',toolbar=0,menubar=0,location=0,status=0,scrollbars=1,resizable=0,left=0,top=0');
                             return false;
                         }
-
 
                         function kosong() {
                             $('#dbarang').val('');

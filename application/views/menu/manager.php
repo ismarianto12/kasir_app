@@ -102,7 +102,8 @@
         </ul>
     </li>
 
-
+    <li><a href="<?= base_url('report_transaksi') ?>"><i class="fa fa-list-o"></i> Report Penjualan</a></li>
+      
     <li class="header">DATA GAJI</li>
     <li class="<?php if ($this->uri->segment(1) == "penggajian") {
                     echo "active";

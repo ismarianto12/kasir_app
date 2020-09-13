@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.majoo.id	TRUE	/	FALSE	1999999999	__cfduid	d14973355b176f93848750f838461b65a1597765536
+dashboard.majoo.id	TRUE	/	FALSE	1999999999	SameSite	Lax
+

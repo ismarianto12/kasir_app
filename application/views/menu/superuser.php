@@ -72,6 +72,8 @@
 
         </a>
     </li>
+ 
+    
     <li class="header">Report</li>
     <li class="treeview">
         <a href="#">
@@ -81,7 +83,7 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="<?= base_url('trtransaksi/report') ?>"><i class="fa fa-circle-o"></i> Report Penjualan</a></li>
+            <li><a href="<?= base_url('report_transaksi') ?>"><i class="fa fa-list-o"></i> Report Penjualan</a></li>
             <li><a href="<?= base_url('trtransaksi/report') ?>"><i class="fa fa-circle-o"></i> Report Pembelian</a></li>
             <li><a href="<?= base_url('barang/report') ?>"><i class="fa fa-circle-o"></i> Report Barang </a></li>
 

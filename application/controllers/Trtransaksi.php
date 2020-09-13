@@ -29,7 +29,7 @@ class Trtransaksi extends CI_Controller
     public function index()
     {
         $x['page_title'] = 'Data : Penjualan';
-        $this->template->load('Template', 'trtransaksi/trtransaksi_list', $x);
+        $this->template->load('template', 'trtransaksi/trtransaksi_list', $x);
     }
 
     public function json($params = '')
@@ -52,7 +52,7 @@ class Trtransaksi extends CI_Controller
                 'date_updated' => $row->date_updated,
                 'page_title' => 'Detail : Penjualan',
             );
-            $this->template->load('Template', 'trtransaksi/trtransaksi_read', $data);
+            $this->template->load('template', 'trtransaksi/trtransaksi_read', $data);
         } else {
         }
     }
@@ -150,12 +150,13 @@ class Trtransaksi extends CI_Controller
                 foreach ($data->result() as $row) {
                     $datalist[] = [
                         'no_penjualan' => $row->no_penjualan,
-                        'kasir_id' => $row->kasir_id,
+                        'kasir_id' => $this->session->id_login,
                         'barang_id' => $row->barang_id,
                         'member_id' => $row->member_id,
                         'jumlah' => $row->jumlah,
-                        'date_created' => $row->date_created,
-                        'date_updated' => $row->date_updated,
+                        'subtotal'=>$row->subtotal,
+                        'date_created' => date('Y-m-d h:i:s'),
+                        'date_updated' => date('Y-m-d h:i:s'),
                     ];
                 }
                 $procesed = $this->db->insert_batch('tmpenjualan', $datalist);

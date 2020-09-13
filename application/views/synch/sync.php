@@ -53,7 +53,7 @@
         <div class="tab-pane" id="transaksi_terima">
             <div class="box-body">
                 <div id="trterima"></div>
-                <a href="#" id="receivetrf" class="btn btn-success"><i class="fa fa-database"></i>Kirim data </a>
+                <a href="#" id="receivetrf" class="btn btn-success"><i class="fa fa-database"></i>Terima Data Transaksi Dari Server </a>
             </div>
             <div class="box-footer">
                 <div class="callout callout-warning">
@@ -67,7 +67,7 @@
         <div class="tab-pane" id="transaksi_kirim">
             <div class="box-body">
                 <div id="trkirim"></div>
-                <a href="#" id="send_transaksi" class="btn btn-success"><i class="fa fa-database"></i>Kirim data </a>
+                <a href="#" id="send_transaksi" class="btn btn-success"><i class="fa fa-database"></i>Synch data transaksi ker server </a>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
@@ -170,7 +170,7 @@
             $("#trkirim").html('<div class="callout callout-warning"><i class="fa fa-share fa-spin"></i>Sedang Synch data (Kirim data barang ke server) ...</div>');
             $('#send_transaksi').hide();
             $.ajax({
-                url: '<?= base_url('Synch_api/terima_transaksi') ?>',
+                url: '<?= base_url('Synch_api/transaksi_kirim') ?>',
                 method: 'get',
                 chace: false,
                 dataType: 'json',
@@ -207,7 +207,7 @@
             $("#trterima").html('<div class="callout callout-warning"><i class="fa fa-share fa-spin"></i></i>Sedang Synch data (Terima data barang dari server) ... </div>');
 
             $.ajax({
-                url: '<?= base_url('synch_api/transaksi_kirim') ?>',
+                url: '<?= base_url('synch_api/terima_transaksi') ?>',
                 method: 'get',
                 chace: false,
                 dataType: 'json',
@@ -215,7 +215,7 @@
                     if (data.status == 1) {
                         $("#trterima").html('<div class="callout callout-success"><i class="fa fa-check"></i>Successful restore from db to local server .</div>');
                         swal.fire({
-                            title: 'Data Success di restore dari server',
+                            title: 'Data Success report penjualan berhasil di restore dari server',
                             text: "berhasil di restore",
                             icon: 'warning'
                         });

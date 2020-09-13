@@ -667,7 +667,7 @@
                         if (gambar == '' || gambar == null) {
                             var html = '<a href="#gambar_' + kode + '" data-toggle="modal" title="' + nama + '"><img src="<?php echo base_url(); ?>gambar/photo.jpg" class="img-circle" alt="' + nama + '" width="60" height="60" onerror="this.src=<?php echo base_url(); ?>gambar/photo.jpg"></a>';
                         } else {
-                            var html = '<a href="#gambar_' + kode + '" data-toggle="modal" title="' + nama + '"><img src="<?php echo base_url(); ?>gambar/' + gambar + '" class="img-circle" alt="' + nama + '" width="60" height="60" onerror="this.src=<?php echo base_url(); ?>gambar/photo.jpg"></a>';
+                            var html = '<a href="#gambar_' + kode + '" data-toggle="modal" title="' + nama + '"><img src="http://gaiabiai.my.id/gambar/' + gambar + '" class="img-circle" alt="' + nama + '" width="60" height="60" onerror="this.src=<?php echo base_url(); ?>gambar/photo.jpg"></a>';
                         }
                         return html
                     }

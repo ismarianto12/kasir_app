@@ -28,6 +28,17 @@
 
     </a>
   </li>
+
+  <li class="header">Histori Penjualan </li>
+  <li class="<?php if ($this->uri->segment(1) == "report_transaksi") {
+                echo "active";
+              } ?>">
+    <a href="<?php echo base_url('report_transaksi') ?>">
+      <i class="fa fa-cubes"></i> <span>Report Transaksi.</span> 
+    </a>
+  </li>
+   
+
   <li class="header">Hostori GAJI</li>
   <li class="<?php if ($this->uri->segment(1) == "penggajian") {
                 echo "active";

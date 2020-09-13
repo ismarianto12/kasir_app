@@ -69,7 +69,7 @@ class Instansi extends CI_Controller
       'nip' => set_value('nip', $nip),
 
     );
-    $this->template->load('Template', 'instansi/instansi_form', $data);
+    $this->template->load('template', 'instansi/instansi_form', $data);
   }
 
   public function json()
@@ -95,7 +95,7 @@ class Instansi extends CI_Controller
         'logo' => $row->logo,
         'page_title' => 'Detail :  Instansi',
       );
-      $this->template->load('Template', 'instansi/instansi_read', $data);
+      $this->template->load('template', 'instansi/instansi_read', $data);
     } else {
       $this->session->set_flashdata('message', '<div class="callout callout-warniing fade-in">Data Tidak Di Temukan.</div>');
       redirect(site_url('instansi'));
