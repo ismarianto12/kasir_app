@@ -141,7 +141,7 @@
                                                     "orderable": false,
                                                  },
                                                 <?php if ($this->session->level == 'kasir' || $this->session->level == 'admin') {  ?>
-                                                <?php } else {  ?>, {
+                                                <?php } else {  ?> {
                                                         "data": "action",
                                                         "orderable": false,
                                                         "className": "text-center"
@@ -198,7 +198,6 @@
                                                     method: 'GET',
                                                     dataType: 'json',
                                                     success: function(data) {
-                                                        kosong();
                                                         $("#barang_tb").DataTable().ajax.reload();
 
                                                     },
