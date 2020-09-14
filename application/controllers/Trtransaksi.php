@@ -106,6 +106,8 @@ class Trtransaksi extends CI_Controller
             if ($cek_barang->num_rows() > 0) {
                 $jumlah       = $cek_barang->row()->jumlah;
                 $jumlahupdate = $jumlah + $this->input->post('jumlah');
+                $rsubtotal    = $cek_barang->row()->subtotal * (int) $jumlahupdate;
+
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
                     'kasir_id' => $this->session->id_login,

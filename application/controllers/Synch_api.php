@@ -184,6 +184,18 @@ class Synch_api extends CI_Controller
         foreach ($stok_api as $rstok) {
             $check = $this->db->get_where('tbl_stok', ['kode_barang' => $rstok->kode_barang]);
             if ($check->num_rows() > 0) {
+                
+                $stokinsert =  [
+                    'kode_barang' => $rstok->kode_barang,
+                    'stock' => $rstok->stock,
+                    'return' => $rstok->return,
+                    'damage' => $rstok->damage,
+                    'loss' => $rstok->loss,
+                    'log' => $rstok->log,
+                ];
+                $this->db->update('tbl_stok', $stokinsert,[
+                    'kode_barang'=>$rstok->kode_barang,
+                ]);
             } else {
                 $stokinsert =  [
                     'kode_barang' => $rstok->kode_barang,
