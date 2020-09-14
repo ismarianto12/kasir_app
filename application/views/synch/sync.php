@@ -3,12 +3,12 @@
         <li class="active"><a href="#tab_terima" data-toggle="tab"><i class="fa fa-database"></i> Sych Kirim data ke server .</a></li>
         <li><a href="#tab_kirim" data-toggle="tab" style="
     background: green;
-    color: #fff;"><i class="fa fa-list"></i> Sych Kirim data dari server .</a></li>
+    color: #fff;"><i class="fa fa-list"></i> Sych Terima data dari server .</a></li>
         <li><a href="#transaksi_terima" data-toggle="tab"><i class="fa fa-list"></i> Sych Data Penjualan (Terima) .</a></li>
         <li><a href="#transaksi_kirim" data-toggle="tab" style="
     background: #bb1b6d;
     color: #fff;
-"><i class="fa fa-list"></i> Sych Data Penjualan (Kirim) .</a></li>
+"><i class="fa fa-list"></i> Sych Kirim Data Penjualan Ke Server.</a></li>
     </ul>
     <div class="tab-content">
         <div class="callout callout-info">

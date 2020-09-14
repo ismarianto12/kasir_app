@@ -27,12 +27,17 @@ class Synch_api extends CI_Controller
 
     function barang_kirim()
     {
-        $tbl_barang = $this->db->get('tbl_barang')->result_array();
-        $tbl_harga  = $this->db->get('tbl_harga')->result_array();
-        $tbl_gambar = $this->db->get('tbl_gambar')->result_array();
+        $tbl_barang['barang'] = $this->db->get('tbl_barang')->result_array();
+        $tbl_harga['harga']  = $this->db->get('tbl_harga')->result_array();
+        $tbl_stok['stok']   = $this->db->get('tbl_stok')->result_array();
+        $tbl_gambar['gambar'] = $this->db->get('tbl_gambar')->result_array();
+
         $key        = ['api_key' => 'rian123'];
-        $data       = array_merge($tbl_barang, $tbl_harga, $tbl_gambar, $key);
+        $data       = array_merge($tbl_barang, $tbl_harga, $tbl_gambar, $tbl_stok, $key);
         $data_app   = json_encode($data);
+
+        //echo $data_app;
+        //exit();
 
         $curl = curl_init();
         curl_setopt_array($curl, array(

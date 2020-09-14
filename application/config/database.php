@@ -1,4 +1,9 @@
 <?php
+
+// 
+// git reset file/to/overwrite
+// git checkout file/to/overwrite
+ 
 // alter table tbl_login add column privelage text NOT NULL after nama;
 //defined('BASEPATH') or exit('No direct script access allowed');
  
