@@ -4,7 +4,7 @@
   you can visit my site in ismarianto.com
   for more complain anda more information.  
 */
-
+// jasa program bisa di tunggu ismarianto 
 // table yang perlu di tambah pada app
 // tbl_barang
 // tbl_stok
