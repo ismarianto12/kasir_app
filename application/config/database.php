@@ -5,7 +5,7 @@
 $hostname  =  'localhost';
 $username  =  'root';
 $password  =  '';
-$database  =  'gaibai';  
+$database  =  'kasir_app';  
 // User: gaiw6978_aa
 // Database: gaiw6978_gabi
 
