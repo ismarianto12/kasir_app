@@ -86,40 +86,59 @@ class Trtransaksi extends CI_Controller
     public function tambah_data()
     {
         $this->_rules();
-
         if ($this->form_validation->run() == FALSE) {
-
             $pesan = ['msg' => str_replace('<span class="text-danger"></span>', ' ', validation_errors())];
             echo json_encode($pesan);
         } else {
-            $diskon    = (int) $this->input->post('diskon');
-            $id_barang = (int) $this->input->post('id_barang');
+            $diskon       = (int) $this->input->post('diskon');
+            $id_barang    = (int) $this->input->post('id_barang');
             if ($diskon > 0 || $diskon != '') {
                 $rharga   = (int)$this->input->post('price') * ($this->input->post('diskon') / 100);
                 $subtotal = (int)$this->input->post('price') - $rharga;
             } else {
                 $subtotal = $this->input->post('price');
             }
-            $rsubtotal = $subtotal * (int) $this->input->post('jumlah');
-            $data = array(
-                'no_penjualan' => $this->input->post('no_penjualan', TRUE),
-                'kasir_id' => $this->session->id_login,
-                'barang_id' => $this->input->post('barang_id', TRUE),
-                'member_id' => $this->input->post('member_id', TRUE),
-                'jumlah' => ($this->input->post('jumlah', TRUE)) ? $this->input->post('jumlah', TRUE) : 'null',
-                'price' => $this->input->post('price'),
-                'item_name' => $this->input->post('price'),
-                'subtotal' => $rsubtotal,
-                'diskon' => ($this->input->post('diskon')) ? $this->input->post('diskon') : 0,
-            );
-            $stat = $this->Trtransaksi_model->insert($data);
-            // if ($stat) {
-            $pesan = ['msg' => 'ok'];
-            echo json_encode($pesan);
-            // } else {
-            //     $pesan = ['msg' => 'Server dalam masalah'];
-            //     echo json_encode($pesan);
-            // }
+            $rsubtotal  = $subtotal * (int) $this->input->post('jumlah');
+
+            $cek_barang = $this->db->get_where('trtransaksi', [
+                'no_penjualan' => $this->input->post('no_penjualan')
+            ]);
+            if ($cek_barang->num_rows() > 0) {
+                $jumlah       = $cek_barang->row()->jumlah;
+                $jumlahupdate = $jumlah + $this->input->post('jumlah');
+                $data = array(
+                    'no_penjualan' => $this->input->post('no_penjualan', TRUE),
+                    'kasir_id' => $this->session->id_login,
+                    'barang_id' => $this->input->post('barang_id', TRUE),
+                    'member_id' => $this->input->post('member_id', TRUE),
+                    'jumlah' => $jumlahupdate,
+                    'price' => $this->input->post('price'),
+                    'item_name' => $this->input->post('price'),
+                    'subtotal' => $rsubtotal,
+                    'diskon' => ($this->input->post('diskon')) ? $this->input->post('diskon') : 0,
+                );
+                $stat = $this->db->update('trtransaksi', $data, [
+                    'no_penjualan' => $this->input->post('no_penjualan')
+                ]);
+                $pesan = ['msg' => 'ok'];
+                echo json_encode($pesan);
+            } else {
+
+                $data = array(
+                    'no_penjualan' => $this->input->post('no_penjualan', TRUE),
+                    'kasir_id' => $this->session->id_login,
+                    'barang_id' => $this->input->post('barang_id', TRUE),
+                    'member_id' => $this->input->post('member_id', TRUE),
+                    'jumlah' => ($this->input->post('jumlah', TRUE)) ? $this->input->post('jumlah', TRUE) : 'null',
+                    'price' => $this->input->post('price'),
+                    'item_name' => $this->input->post('price'),
+                    'subtotal' => $rsubtotal,
+                    'diskon' => ($this->input->post('diskon')) ? $this->input->post('diskon') : 0,
+                );
+                $stat = $this->Trtransaksi_model->insert($data);
+                $pesan = ['msg' => 'ok'];
+                echo json_encode($pesan);
+            }
         }
     }
     function hapus_transaksi()
@@ -154,7 +173,7 @@ class Trtransaksi extends CI_Controller
                         'barang_id' => $row->barang_id,
                         'member_id' => $row->member_id,
                         'jumlah' => $row->jumlah,
-                        'subtotal'=>$row->subtotal,
+                        'subtotal' => $row->subtotal,
                         'date_created' => date('Y-m-d h:i:s'),
                         'date_updated' => date('Y-m-d h:i:s'),
                     ];
@@ -165,6 +184,12 @@ class Trtransaksi extends CI_Controller
                     array('finish' => '1'),
                     array('no_penjualan' => trim($faktur_no))
                 );
+                $this->db->update('tbl_stok', [
+                    'stock' => -1
+                ], [
+                    'kode_barang' => $row->barang_id
+                ]);
+
                 if ($procesed) {
                     echo json_encode(['stat' => 1, 'msg' => 'Data Penjualan telah di simpan']);
                 } else {
@@ -355,8 +380,8 @@ class Trtransaksi extends CI_Controller
                     'render' => $data
                 ];
                 $this->load->view('trtransaksi/struk', $x);
-                $data = ['stock'=> -1];
-                $this->db->update("tbl_stok",$data,['kode_barang'=>$id]);
+                $data = ['stock' => -1];
+                $this->db->update("tbl_stok", $data, ['kode_barang' => $id]);
             } else {
                 echo json_encode(['msg' => 'data tidak terparsing dengan baik']);
             }
@@ -365,7 +390,7 @@ class Trtransaksi extends CI_Controller
     }
 
 
-    
+
 
 
 

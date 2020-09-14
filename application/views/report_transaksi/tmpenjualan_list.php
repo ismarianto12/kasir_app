@@ -23,7 +23,7 @@
                                             <th>Harga Satuan</th>
                                             <th>Jumlah</th>
                                             <th>Diskon</th>
-                                            <th>Sub Total</th> 
+                                            <th>Sub Total</th>
                                             <th>Tgl .Transaksi</th>
                                             <?php if ($this->session->level == 'kasir' || $this->session->level == 'admin') {  ?>
                                             <?php } else {  ?>
@@ -46,15 +46,11 @@
                                 </table>
 
                                 <div class="alert alert-info">
-
-                                                <p>
-                                                    Data penjualan muncul apa bila di di list transaksi<br/> 
-                                                    struk penjualan berhasil di cetak terlebih dahulu.
-                                                </p>
-
-
+                                    <p>
+                                        Data penjualan muncul apa bila di di list transaksi<br />
+                                        struk penjualan berhasil di cetak terlebih dahulu.
+                                    </p>
                                 </div>
-
                                 <script type="text/javascript" src="<?= base_url('tpl/button/dataTables.buttons.min.js') ?>"></script>
                                 <script type="text/javascript" src="<?= base_url('tpl/button/jszip.min.js')  ?>"></script>
                                 <script type="text/javascript" src="<?= base_url('tpl/button/pdfmake.min.js')  ?>"></script>
@@ -139,7 +135,7 @@
                                                 {
                                                     "data": "date_created",
                                                     "orderable": false,
-                                                 },
+                                                },
                                                 <?php if ($this->session->level == 'kasir' || $this->session->level == 'admin') {  ?>
                                                 <?php } else {  ?> {
                                                         "data": "action",
