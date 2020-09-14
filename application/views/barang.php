@@ -138,9 +138,7 @@
             <div class="tab-pane" id="tab_harga">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa <?php echo $faicon_harga; ?>"></i> <?php echo $title_harga; ?></h3>
-
-                </div>
-
+                </div> 
                 <div class="box-body">
                     <table id="tabledatahargabarang" class="table table-bordered table-hover dt-responsive" style="width:100%">
                         <thead>
