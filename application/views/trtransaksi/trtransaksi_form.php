@@ -319,7 +319,8 @@
                                 "data": "id",
                                 "orderable": false
                             }, {
-                                "data": "kode"
+                                "data": "kode", 
+                                "orderable": false
                             }, {
                                 "data": "nama"
                             },

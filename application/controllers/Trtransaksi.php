@@ -90,19 +90,37 @@ class Trtransaksi extends CI_Controller
             $pesan = ['msg' => str_replace('<span class="text-danger"></span>', ' ', validation_errors())];
             echo json_encode($pesan);
         } else {
+
             $diskon       = (int) $this->input->post('diskon');
-            $id_barang    = (int) $this->input->post('id_barang');
+            $id_barang    = (int) $this->input->post('barang_id');
             if ($diskon > 0 || $diskon != '') {
                 $rharga   = (int)$this->input->post('price') * ($this->input->post('diskon') / 100);
                 $subtotal = (int)$this->input->post('price') - $rharga;
             } else {
                 $subtotal = $this->input->post('price');
             }
- 
+
             $cek_barang = $this->db->get_where('trtransaksi', [
                 'no_penjualan' => $this->input->post('no_penjualan')
             ]);
+
+
+            //cek datai table stok
+            $rstok = $this->db->get_where('tbl_stok', [
+                'kode_barang' => $this->input->post('barang_id'),
+            ]);
             if ($cek_barang->num_rows() > 0) {
+
+                if ($rstok->num_rows() > 0) {
+                    $upstok = (int) $rstok->row()->stock;
+                    $stok2  =  (int) $cek_barang->row()->jumlah;
+                    if ($upstok != $stok2) {
+                        $pesan = ['msg' => 'jumlah stok tidak memadai'];
+                        echo json_encode($pesan);
+                        exit();
+                    }
+                }
+
                 $jumlah       = $cek_barang->row()->jumlah;
                 $jumlahupdate = $jumlah + $this->input->post('jumlah');
                 $rsubtotal    = (int) $this->input->post('jumlah') * (int) $jumlahupdate;
@@ -124,6 +142,16 @@ class Trtransaksi extends CI_Controller
                 $pesan = ['msg' => 'ok'];
                 echo json_encode($pesan);
             } else {
+
+                if ($rstok->num_rows() > 0) {
+                    $upstok = (int) $rstok->row()->stock;
+                    $stok2  =  (int) $this->input->post('jumlah');
+                    if ($upstok != $stok2) {
+                        $pesan = ['msg' => 'jumlah stok tidak memadai'];
+                        echo json_encode($pesan);
+                        exit();
+                    }
+                } 
                 $rsubtotal  = $subtotal * (int) $this->input->post('jumlah');
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
@@ -184,20 +212,20 @@ class Trtransaksi extends CI_Controller
                     'trtransaksi',
                     array('finish' => '1'),
                     array('no_penjualan' => trim($faktur_no))
-                ); 
+                );
 
                 $rstok = $this->db->get_where('tbl_stok', [
                     'kode_barang' => $row->barang_id
                 ]);
-                if($rstok->num_rows() > 0){
+                if ($rstok->num_rows() > 0) {
                     $upstok = (int) $rstok->row()->stock - (int) $row->jumlah;
                     $this->db->update('tbl_stok', [
-                        'stock' => $upstok   
+                        'stock' => $upstok
                     ], [
                         'kode_barang' => $row->barang_id
                     ]);
                 }
-   
+
                 if ($procesed) {
                     echo json_encode(['stat' => 1, 'msg' => 'Data Penjualan telah di simpan']);
                 } else {
@@ -320,7 +348,24 @@ class Trtransaksi extends CI_Controller
             } else {
                 $subtotal = $this->input->post('price');
             }
+
             $rsubtotal = $subtotal * (int) $this->input->post('jumlah');
+
+            //cek datai table stok
+            $rstok = $this->db->get_where('tbl_stok', [
+                'kode_barang' => $this->input->post('id_barang'),
+            ]);
+
+            if ($rstok->num_rows() > 0) {
+                $upstok = (int) $rstok->row()->stock;
+                $stok2  =  (int) $this->input->post('jumlah');
+                if ($upstok != $stok2) {
+                    $pesan = ['msg' => 'jumlah stok tidak memadai'];
+                    echo json_encode($pesan);
+                    exit();
+                }
+            }
+
             $data = array(
                 'no_penjualan' => $this->input->post('no_penjualan', TRUE),
                 'kasir_id' => $this->session->id_login,
