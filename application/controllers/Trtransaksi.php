@@ -98,15 +98,14 @@ class Trtransaksi extends CI_Controller
             } else {
                 $subtotal = $this->input->post('price');
             }
-            $rsubtotal  = $subtotal * (int) $this->input->post('jumlah');
-
+ 
             $cek_barang = $this->db->get_where('trtransaksi', [
                 'no_penjualan' => $this->input->post('no_penjualan')
             ]);
             if ($cek_barang->num_rows() > 0) {
                 $jumlah       = $cek_barang->row()->jumlah;
                 $jumlahupdate = $jumlah + $this->input->post('jumlah');
-                $rsubtotal    = $cek_barang->row()->subtotal * (int) $jumlahupdate;
+                $rsubtotal    = (int) $this->input->post('jumlah') * (int) $jumlahupdate;
 
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
@@ -125,7 +124,7 @@ class Trtransaksi extends CI_Controller
                 $pesan = ['msg' => 'ok'];
                 echo json_encode($pesan);
             } else {
-
+                $rsubtotal  = $subtotal * (int) $this->input->post('jumlah');
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
                     'kasir_id' => $this->session->id_login,
@@ -185,13 +184,20 @@ class Trtransaksi extends CI_Controller
                     'trtransaksi',
                     array('finish' => '1'),
                     array('no_penjualan' => trim($faktur_no))
-                );
-                $this->db->update('tbl_stok', [
-                    'stock' => -1
-                ], [
+                ); 
+
+                $rstok = $this->db->get_where('tbl_stok', [
                     'kode_barang' => $row->barang_id
                 ]);
-
+                if($rstok->num_rows() > 0){
+                    $upstok = (int) $rstok->row()->stock - (int) $row->jumlah;
+                    $this->db->update('tbl_stok', [
+                        'stock' => $upstok   
+                    ], [
+                        'kode_barang' => $row->barang_id
+                    ]);
+                }
+   
                 if ($procesed) {
                     echo json_encode(['stat' => 1, 'msg' => 'Data Penjualan telah di simpan']);
                 } else {

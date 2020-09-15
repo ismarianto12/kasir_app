@@ -35,10 +35,7 @@ class Synch_api extends CI_Controller
         $key        = ['api_key' => 'rian123'];
         $data       = array_merge($tbl_barang, $tbl_harga, $tbl_gambar, $tbl_stok, $key);
         $data_app   = json_encode($data);
-
-        //echo $data_app;
-        //exit();
-
+  
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "http://gaiabiai.my.id/synch_server/insert_barang",
