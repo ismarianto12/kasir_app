@@ -114,7 +114,7 @@ class Trtransaksi extends CI_Controller
                 if ($rstok->num_rows() > 0) {
                     $upstok = (int) $rstok->row()->stock;
                     $stok2  =  (int) $cek_barang->row()->jumlah;
-                    if ($upstok != $stok2) {
+                    if ($upstok < $stok2) {
                         $pesan = ['msg' => 'jumlah stok tidak memadai'];
                         echo json_encode($pesan);
                         exit();
@@ -146,7 +146,7 @@ class Trtransaksi extends CI_Controller
                 if ($rstok->num_rows() > 0) {
                     $upstok = (int) $rstok->row()->stock;
                     $stok2  =  (int) $this->input->post('jumlah');
-                    if ($upstok != $stok2) {
+                    if ($upstok <= $stok2) {
                         $pesan = ['msg' => 'jumlah stok tidak memadai'];
                         echo json_encode($pesan);
                         exit();
@@ -359,7 +359,7 @@ class Trtransaksi extends CI_Controller
             if ($rstok->num_rows() > 0) {
                 $upstok = (int) $rstok->row()->stock;
                 $stok2  =  (int) $this->input->post('jumlah');
-                if ($upstok != $stok2) {
+                if ($upstok  <= $stok2) {
                     $pesan = ['msg' => 'jumlah stok tidak memadai'];
                     echo json_encode($pesan);
                     exit();

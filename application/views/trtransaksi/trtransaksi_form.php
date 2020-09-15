@@ -388,7 +388,7 @@
                                 } else {
                                     swal.fire({
                                         title: "Terjadi Kesalahan Berikut",
-                                        html: data.msg + '<br />',
+                                        html: data.msg + '<br /> <b>Saran Silahkan Stok Opname terlebih dahulu.</b>',
                                         confirmButtonText: "Ok",
                                     });
 
