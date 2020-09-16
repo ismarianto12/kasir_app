@@ -109,6 +109,8 @@ class Trtransaksi extends CI_Controller
             $rstok = $this->db->get_where('tbl_stok', [
                 'kode_barang' => $this->input->post('barang_id'),
             ]);
+            $fharga  = str_replace($this->input->post('price'), ' ', ',');
+            $fdiskon = ($this->input->post('diskon')) ? $this->input->post('diskon') : 0;
             if ($cek_barang->num_rows() > 0) {
 
                 if ($rstok->num_rows() > 0) {
@@ -123,7 +125,7 @@ class Trtransaksi extends CI_Controller
 
                 $jumlah       = $cek_barang->row()->jumlah;
                 $jumlahupdate = $jumlah + $this->input->post('jumlah');
-                $rsubtotal    = (int) $this->input->post('jumlah') * (int) $jumlahupdate;
+                $rsubtotal    = (((int) $cek_barang->row()->diskon / 100) * (int) $fharga) *  (int) $jumlahupdate;
 
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
@@ -132,7 +134,7 @@ class Trtransaksi extends CI_Controller
                     'member_id' => $this->input->post('member_id', TRUE),
                     'jumlah' => $jumlahupdate,
                     'price' => $this->input->post('price'),
-                    'item_name' => $this->input->post('price'),
+                    'item_name' => $this->input->post('item'),
                     'subtotal' => $rsubtotal,
                     'diskon' => ($this->input->post('diskon')) ? $this->input->post('diskon') : 0,
                 );
@@ -151,8 +153,8 @@ class Trtransaksi extends CI_Controller
                         echo json_encode($pesan);
                         exit();
                     }
-                } 
-                $rsubtotal  = $subtotal * (int) $this->input->post('jumlah');
+                }
+                $rsubtotal    = (((int) $this->input->post('diskon') / 100) * (int) $fharga) *  (int) $this->input->post('jumlah');
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
                     'kasir_id' => $this->session->id_login,
@@ -162,7 +164,7 @@ class Trtransaksi extends CI_Controller
                     'price' => $this->input->post('price'),
                     'item_name' => $this->input->post('price'),
                     'subtotal' => $rsubtotal,
-                    'diskon' => ($this->input->post('diskon')) ? $this->input->post('diskon') : 0,
+                    'diskon' => $fdiskon,
                 );
                 $stat = $this->Trtransaksi_model->insert($data);
                 $pesan = ['msg' => 'ok'];
