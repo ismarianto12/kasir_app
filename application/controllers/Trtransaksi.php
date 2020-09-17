@@ -126,7 +126,7 @@ class Trtransaksi extends CI_Controller
                 $jumlahupdate =  $cek_barang->row()->jumlah + $this->input->post('jumlah');
                 $diskon       =  $cek_barang->row()->diskon + $fdiskon;
                 $price        =  $cek_barang->row()->price  + $this->input->post('price');
-                $gjumlah      =  ($diskon / 100) *  $price;
+                $gjumlah      =  ($fdiskon / 100) * $price;
                 $rsubtotal    =  $price - $gjumlah  * $jumlahupdate;
 
 
