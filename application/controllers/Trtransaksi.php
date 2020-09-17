@@ -154,7 +154,7 @@ class Trtransaksi extends CI_Controller
                         exit();
                     }
                 }
-                $totalj       =  (int)$this->input->post('price') * $this->input->pot('jumlah');
+                $totalj       =  (int)$this->input->post('price') * $this->input->post('jumlah');
                 $rsubtotal    =  $totalj  - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
                
                 $data = array(
