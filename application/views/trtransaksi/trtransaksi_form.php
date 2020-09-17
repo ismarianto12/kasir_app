@@ -356,7 +356,6 @@
                     $('input[name="jumlah"]').val('');
                     $('input[name="member_id"]').val('');
                     $('input[name="diskon"]').val('');
-
                 }
 
                 function getJumlah() {

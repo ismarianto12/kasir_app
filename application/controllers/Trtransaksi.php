@@ -122,9 +122,12 @@ class Trtransaksi extends CI_Controller
                         exit();
                     }
                 }
-                $jumlahupdate =  (int) $cek_barang->row()->jumlah + (int) $this->input->post('jumlah');
-                $gjumlah      =  (int)$this->input->post('price') * (int) $jumlahupdate - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
-                $rsubtotal    =  $gjumlah * (int) $jumlahupdate;
+                $fdiskon      =  $this->input->post('diskon') ? $this->input->post('diskon') : 0;
+                $jumlahupdate =  $cek_barang->row()->jumlah + $this->input->post('jumlah');
+                $diskon       =  $cek_barang->row()->diskon + $fdiskon;
+                $price        =  $cek_barang->row()->price  + $this->input->post('price');
+                $gjumlah      =  ($diskon / 100) *  $price;
+                $rsubtotal    =  $price - $gjumlah  * $jumlahupdate;
 
 
                 $data = array(
@@ -136,7 +139,7 @@ class Trtransaksi extends CI_Controller
                     'price' => $this->input->post('price'),
                     'item_name' => $this->input->post('item'),
                     'subtotal' => $rsubtotal,
-                    'diskon' => ($this->input->post('diskon')) ? $this->input->post('diskon') : 0,
+                    'diskon' => $diskon,
                 );
                 $stat = $this->db->update('trtransaksi', $data, [
                     'no_penjualan' => $this->input->post('no_penjualan')
@@ -156,7 +159,7 @@ class Trtransaksi extends CI_Controller
                 }
                 $totalj       =  (int)$this->input->post('price') * $this->input->post('jumlah');
                 $rsubtotal    =  $totalj  - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
-               
+
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
                     'kasir_id' => $this->session->id_login,
