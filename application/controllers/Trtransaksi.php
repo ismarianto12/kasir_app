@@ -136,7 +136,7 @@ class Trtransaksi extends CI_Controller
                     'barang_id' => $this->input->post('barang_id', TRUE),
                     'member_id' => $this->input->post('member_id', TRUE),
                     'jumlah' => $jumlahupdate,
-                    'price' => $this->input->post('price'),
+                    'price' => $price,
                     'item_name' => $this->input->post('item'),
                     'subtotal' => $rsubtotal,
                     'diskon' => $diskon,
