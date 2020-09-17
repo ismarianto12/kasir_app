@@ -109,7 +109,7 @@ class Trtransaksi extends CI_Controller
             $rstok = $this->db->get_where('tbl_stok', [
                 'kode_barang' => $this->input->post('barang_id'),
             ]);
-            $fharga  = str_replace($this->input->post('price'), ' ', ',');
+            $fharga  = $this->input->post('price');
             $fdiskon = ($this->input->post('diskon')) ? $this->input->post('diskon') : 0;
             if ($cek_barang->num_rows() > 0) {
 
@@ -122,10 +122,10 @@ class Trtransaksi extends CI_Controller
                         exit();
                     }
                 }
+                $jumlahupdate =  (int) $cek_barang->row()->jumlah * (int)$this->input->post('jumlah');
+                $gjumlah      =  (int)$this->input->post('pice') - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
+                $rsubtotal    =  $gjumlah * (int) $jumlahupdate;
 
-                $jumlah       = $cek_barang->row()->jumlah;
-                $jumlahupdate = $jumlah + $this->input->post('jumlah');
-                $rsubtotal    = (((int) $cek_barang->row()->diskon / 100) * (int) $fharga) *  (int) $jumlahupdate;
 
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
@@ -154,7 +154,8 @@ class Trtransaksi extends CI_Controller
                         exit();
                     }
                 }
-                $rsubtotal    = (((int) $this->input->post('diskon') / 100) * (int) $fharga) *  (int) $this->input->post('jumlah');
+                $gjumlah      =  (int)$this->input->post('pice') - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
+                $rsubtotal    =  $gjumlah *  (int) $this->input->post('jumlah');
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
                     'kasir_id' => $this->session->id_login,
