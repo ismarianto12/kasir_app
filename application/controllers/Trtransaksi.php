@@ -123,7 +123,7 @@ class Trtransaksi extends CI_Controller
                     }
                 }
                 $jumlahupdate =  (int) $cek_barang->row()->jumlah * (int)$this->input->post('jumlah');
-                $gjumlah      =  (int)$this->input->post('pice') - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
+                $gjumlah      =  (int)$this->input->post('price') - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
                 $rsubtotal    =  $gjumlah * (int) $jumlahupdate;
 
 
@@ -154,7 +154,7 @@ class Trtransaksi extends CI_Controller
                         exit();
                     }
                 }
-                $gjumlah      =  (int)$this->input->post('pice') - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
+                $gjumlah      =  (int)$this->input->post('price') - ((int) $this->input->post('diskon') / 100) * $this->input->post('price');
                 $rsubtotal    =  $gjumlah *  (int) $this->input->post('jumlah');
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
