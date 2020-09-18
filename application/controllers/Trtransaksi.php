@@ -169,15 +169,15 @@ class Trtransaksi extends CI_Controller
 
                 $data = array(
                     'no_penjualan' => $this->input->post('no_penjualan', TRUE),
-                    'kasir_id' => $this->session->id_login,
-                    'barang_id' => $this->input->post('barang_id', TRUE),
-                    'member_id' => $this->input->post('member_id', TRUE),
-                    'jumlah' => ($this->input->post('jumlah', TRUE)) ? $this->input->post('jumlah', TRUE) : 'null',
-                    'price' => $this->input->post('price'),
-                    'item_name' => $this->input->post('price'),
-                    'final' => 0,
-                    'subtotal' => $rsubtotal,
-                    'diskon' => $fdiskon,
+                    'kasir_id'     => $this->session->id_login,
+                    'barang_id'    => $this->input->post('barang_id', TRUE),
+                    'member_id'    => $this->input->post('member_id', TRUE),
+                    'jumlah'       => ($this->input->post('jumlah', TRUE)) ? $this->input->post('jumlah', TRUE) : 'null',
+                    'price'        => $this->input->post('price'),
+                    'item_name'    => $this->input->post('price'),
+                    'finish'       => 0,
+                    'subtotal'     => $rsubtotal,
+                    'diskon'       => $fdiskon,
                 );
                 $stat = $this->Trtransaksi_model->insert($data);
                 $pesan = ['msg' => 'ok'];
