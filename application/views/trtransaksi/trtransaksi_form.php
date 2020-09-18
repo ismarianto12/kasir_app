@@ -315,7 +315,8 @@
                             "url": "<?= base_url('member/json/select_data') ?>",
                             "type": "POST"
                         },
-                        columns: [{
+                        columns: [
+                            {
                                 "data": "id",
                                 "orderable": false
                             }, {

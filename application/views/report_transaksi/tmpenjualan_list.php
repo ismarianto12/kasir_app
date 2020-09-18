@@ -32,10 +32,10 @@
                                         </tr>
                                     </thead>
                                     <tbody style="
-    font-size: 12pt;
-    font-style: italic;
-    font-family: cursive;
-"></tbody>
+                                                font-size: 12pt;
+                                                font-style: italic;
+                                                font-family: cursive;
+                                            "></tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="5" style="text-align:center;font-size: 23pt;">Total Pendapatan</th>
@@ -71,7 +71,6 @@
                                                 "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
                                             };
                                         };
-
 
                                         var lis_tr = $("#barang_tb").DataTable({
                                             dom: 'Bfrtip',

@@ -29,8 +29,7 @@ class Trtransaksi_model extends CI_Model
                     trtransaksi.kasir_id, 
                     trtransaksi.diskon, 
                     trtransaksi.finish,
-                    trtransaksi.subtotal,
-                    
+                    trtransaksi.subtotal,  
                     
                     tbl_barang.kode_barang, 
                     tbl_barang.nm_barang, 
