@@ -1,17 +1,5 @@
-<?php
-
-/*developed by ismarianto putra
-  you can visit my site in ismarianto.com
-  for more complain anda more information.  
-*/
-// jasa program bisa di tunggu ismarianto 
-// table yang perlu di tambah pada app
-// tbl_barang
-// tbl_stok
-// trtransaksi
-// member
-// tbl_login
-// sett
+<?php 
+ 
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -100,8 +88,8 @@ class Trtransaksi extends CI_Controller
             echo json_encode($pesan);
         } else {
 
-            $diskon       = (int) $this->input->post('diskon');
-            $id_barang    = (int) $this->input->post('barang_id');
+            $diskon       = $this->input->post('diskon');
+            $id_barang    = $this->input->post('barang_id');
             if ($diskon > 0 || $diskon != '') {
                 $rharga   = (int)$this->input->post('price') * ($this->input->post('diskon') / 100);
                 $subtotal = (int)$this->input->post('price') - $rharga;

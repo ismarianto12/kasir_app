@@ -55,7 +55,7 @@
                                 <div class='col-md-6'>
                                     <div class='row'>
                                         <div class='col-md-offset-3 col-md-9'>
-                                            <button type='submit' id="cupdate" class='btn btn-success'>Simpan Data</button>
+                                            <button type='submit' class="simpan" class='btn btn-success'>Simpan Data</button>
                                             <button type='button' class='btn btn-default'>Cancel</button>
                                             <br />
                                         </div>
@@ -74,8 +74,7 @@
 
 <script type="text/javascript">
     $(function() {
-
-
+  
         $('#cupdate').submit(function(e) {
             e.preventDefault();
             var username = $('#username').val();
